@@ -12,8 +12,13 @@ export CLICOLOR_FORCE=1
 # Don't require escaping globbing characters in zsh.
 unsetopt nomatch
 
+# git
+function parse_git_branch() {
+    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p'
+}
+
 # Nicer prompt.
-export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
+export PS1=$'\n'"%F{blue}%*%F %3~ $(parse_git_branch) %F{white}"$'\n'"$ "
 
 # Enable plugins.
 plugins=(git brew history kubectl history-substring-search)
