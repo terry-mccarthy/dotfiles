@@ -24,7 +24,7 @@ export PS1=$'\n'"%F{blue}%*%F %3~ $(parse_git_branch) %F{white}"$'\n'"$ "
 plugins=(git brew history kubectl history-substring-search)
 
 # Custom $PATH with extra locations.
-export PATH=$HOME/Library/Python/3.8/bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$HOME/.composer/vendor/bin:$PATH
+export PATH=$HOME/Library/Python/3.9/bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$HOME/.composer/vendor/bin:$PATH
 
 # Bash-style time output.
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
@@ -130,3 +130,13 @@ export COMPOSER_MEMORY_LIMIT=-1
 #}
 #shopt -s extdebug
 #trap prod_command_trap DEBUG
+
+# remote into shippit server instances
+shipgod() {
+  CONFIG_PROFILE="old-prd-support"
+  if [[ $1 =~ dev ]]
+  then
+    CONFIG_PROFILE="old-dev-support"
+  fi
+  makeship connect -e $1 -r web -p $CONFIG_PROFILE
+}
