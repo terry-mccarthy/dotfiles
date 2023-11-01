@@ -132,6 +132,10 @@ export COMPOSER_MEMORY_LIMIT=-1
 #trap prod_command_trap DEBUG
 
 # remote into shippit server instances
+# - shipgod production 
+# - shipgod dev1
+# - shipgod dev2
+# - shipgod staging
 shipgod() {
   CONFIG_PROFILE="old-prd-support"
   if [[ $1 =~ dev ]]
