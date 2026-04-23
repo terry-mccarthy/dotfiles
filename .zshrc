@@ -131,16 +131,4 @@ export COMPOSER_MEMORY_LIMIT=-1
 #shopt -s extdebug
 #trap prod_command_trap DEBUG
 
-# remote into shippit server instances
-# - shipgod production 
-# - shipgod dev1
-# - shipgod dev2
-# - shipgod staging
-shipgod() {
-  CONFIG_PROFILE="old-prd-support"
-  if [[ $1 =~ dev ]]
-  then
-    CONFIG_PROFILE="old-dev-support"
-  fi
-  makeship connect -e $1 -r web -p $CONFIG_PROFILE
-}
+eval "$(starship init zsh)"
